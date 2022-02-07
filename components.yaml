@@ -1,0 +1,17 @@
+# Extra component metadata
+# Format:
+#
+#    directoryname:
+#        name: User-readable Name
+#        url: A URL to link to in the module info
+#        group: Module group for display -- empty string to display at top level
+#        snapshot-regex: (optional): regex to use to determine if a version should be considered a snapshot. Default `-SNAPSHOT$`
+
+library:
+    name: Library
+    url: https://github.com/DeltaPvPNET/Library
+    group: ""
+pyrite:
+    name: Pyrite
+    url: https://github.com/DeltaPvPNET/Pyrite
+    group: libraries
