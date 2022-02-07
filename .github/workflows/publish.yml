@@ -25,7 +25,7 @@ jobs:
         run: |
           python _generator/generate.py $DEST_DIR
       - name: "publish"
-        if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/data' }}"
+        if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}"
         uses: "JamesIves/github-pages-deploy-action@4.1.4"
         with:
           branch: "gh-pages"
