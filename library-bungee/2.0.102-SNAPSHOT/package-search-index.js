@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"net.deltapvp.library.bungee"},{"l":"net.deltapvp.library.bungee.platform"},{"l":"net.deltapvp.library.bungee.util.text"}]
