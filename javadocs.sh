@@ -32,6 +32,7 @@ case "$COMMAND" in
         set -e
         shift
         cd "$basedir"
+        rm -rf LibraryParent/
         git add .
         git commit -m "$@" -s
         git push origin "$BRANCH"

@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"net.deltapvp.library.jda.util","l":"DiscordUtil"},{"p":"net.deltapvp.library.jda.util","l":"EmbedUtil"},{"p":"net.deltapvp.library.jda.util.text","l":"JDAMiniMessageParser"},{"p":"net.deltapvp.library.jda.util","l":"ListenerUtil"},{"p":"net.deltapvp.library.jda.util","l":"SearchUtil"}]
