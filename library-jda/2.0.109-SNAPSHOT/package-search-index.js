@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"net.deltapvp.library.jda.util"},{"l":"net.deltapvp.library.jda.util.text"}]

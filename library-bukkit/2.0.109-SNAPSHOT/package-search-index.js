@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"net.deltapvp.library.bukkit"},{"l":"net.deltapvp.library.bukkit.platform"},{"l":"net.deltapvp.library.bukkit.util"},{"l":"net.deltapvp.library.bukkit.util.chat"},{"l":"net.deltapvp.library.bukkit.util.gson"},{"l":"net.deltapvp.library.bukkit.util.item"},{"l":"net.deltapvp.library.bukkit.util.nbt"}]
