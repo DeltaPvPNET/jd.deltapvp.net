@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"net.deltapvp.pyrite"},{"l":"net.deltapvp.pyrite.packet"},{"l":"net.deltapvp.pyrite.test"},{"l":"net.deltapvp.pyrite.util"}]
