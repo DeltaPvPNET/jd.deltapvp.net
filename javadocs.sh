@@ -38,6 +38,17 @@ case "$COMMAND" in
         git push origin "$BRANCH"
     ) || failed=1
     ;;
+    "delete-old" | "do")
+    (
+        set -e
+        shift
+        cd "$basedir"
+        
+        git add .
+        git commit -m "Delete old versions" -s
+        git push origin "$BRANCH"
+    ) || failed=1
+    ;;
 esac
 
 unset RCPATH
