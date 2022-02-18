@@ -1,179 +1,180 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
 <title>Source code</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
+<main role="main">
 <div class="sourceContainer">
-<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * This file is part of Library, licensed under the MIT License.<a name="line.2"></a>
-<span class="sourceLineNo">003</span> *<a name="line.3"></a>
-<span class="sourceLineNo">004</span> *  Copyright (c) 2021-2022 DeltaPvP<a name="line.4"></a>
-<span class="sourceLineNo">005</span> *  Copyright (c) 2021-2022 contributors<a name="line.5"></a>
-<span class="sourceLineNo">006</span> *<a name="line.6"></a>
-<span class="sourceLineNo">007</span> * Permission is hereby granted, free of charge, to any person obtaining a copy<a name="line.7"></a>
-<span class="sourceLineNo">008</span> * of this software and associated documentation files (the "Software"), to deal<a name="line.8"></a>
-<span class="sourceLineNo">009</span> * in the Software without restriction, including without limitation the rights<a name="line.9"></a>
-<span class="sourceLineNo">010</span> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<a name="line.10"></a>
-<span class="sourceLineNo">011</span> * copies of the Software, and to permit persons to whom the Software is<a name="line.11"></a>
-<span class="sourceLineNo">012</span> * furnished to do so, subject to the following conditions:<a name="line.12"></a>
-<span class="sourceLineNo">013</span> *<a name="line.13"></a>
-<span class="sourceLineNo">014</span> * The above copyright notice and this permission notice shall be included in all<a name="line.14"></a>
-<span class="sourceLineNo">015</span> * copies or substantial portions of the Software.<a name="line.15"></a>
-<span class="sourceLineNo">016</span> *<a name="line.16"></a>
-<span class="sourceLineNo">017</span> * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<a name="line.17"></a>
-<span class="sourceLineNo">018</span> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<a name="line.18"></a>
-<span class="sourceLineNo">019</span> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<a name="line.19"></a>
-<span class="sourceLineNo">020</span> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<a name="line.20"></a>
-<span class="sourceLineNo">021</span> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<a name="line.21"></a>
-<span class="sourceLineNo">022</span> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<a name="line.22"></a>
-<span class="sourceLineNo">023</span> * SOFTWARE.<a name="line.23"></a>
-<span class="sourceLineNo">024</span> */<a name="line.24"></a>
-<span class="sourceLineNo">025</span>package net.deltapvp.library.common.util;<a name="line.25"></a>
-<span class="sourceLineNo">026</span><a name="line.26"></a>
-<span class="sourceLineNo">027</span>import java.util.Map;<a name="line.27"></a>
-<span class="sourceLineNo">028</span><a name="line.28"></a>
-<span class="sourceLineNo">029</span>import net.deltapvp.library.common.util.callbacks.HttpCallback;<a name="line.29"></a>
-<span class="sourceLineNo">030</span>import okhttp3.Headers;<a name="line.30"></a>
-<span class="sourceLineNo">031</span>import okhttp3.MediaType;<a name="line.31"></a>
-<span class="sourceLineNo">032</span>import okhttp3.OkHttpClient;<a name="line.32"></a>
-<span class="sourceLineNo">033</span>import okhttp3.Request;<a name="line.33"></a>
-<span class="sourceLineNo">034</span>import okhttp3.RequestBody;<a name="line.34"></a>
-<span class="sourceLineNo">035</span>import okhttp3.Response;<a name="line.35"></a>
-<span class="sourceLineNo">036</span><a name="line.36"></a>
-<span class="sourceLineNo">037</span>public class HttpClient {<a name="line.37"></a>
-<span class="sourceLineNo">038</span>    private static HttpClient mInstance = null;<a name="line.38"></a>
-<span class="sourceLineNo">039</span>    private static String mUrl;<a name="line.39"></a>
-<span class="sourceLineNo">040</span>    private Request.Builder requestBuilder;<a name="line.40"></a>
-<span class="sourceLineNo">041</span>    private Response responseOk;<a name="line.41"></a>
-<span class="sourceLineNo">042</span><a name="line.42"></a>
-<span class="sourceLineNo">043</span>    public static HttpClient load(String url) {<a name="line.43"></a>
-<span class="sourceLineNo">044</span>        mInstance = new HttpClient();<a name="line.44"></a>
-<span class="sourceLineNo">045</span>        mUrl = url;<a name="line.45"></a>
-<span class="sourceLineNo">046</span>        return mInstance;<a name="line.46"></a>
-<span class="sourceLineNo">047</span>    }<a name="line.47"></a>
-<span class="sourceLineNo">048</span><a name="line.48"></a>
-<span class="sourceLineNo">049</span>    public HttpClient get() {<a name="line.49"></a>
-<span class="sourceLineNo">050</span>        requestBuilder = new Request.Builder()<a name="line.50"></a>
-<span class="sourceLineNo">051</span>                .url(mUrl);<a name="line.51"></a>
-<span class="sourceLineNo">052</span>        return mInstance;<a name="line.52"></a>
-<span class="sourceLineNo">053</span>    }<a name="line.53"></a>
-<span class="sourceLineNo">054</span><a name="line.54"></a>
-<span class="sourceLineNo">055</span>    public HttpClient delete(RequestBody body) {<a name="line.55"></a>
-<span class="sourceLineNo">056</span>        requestBuilder = new Request.Builder()<a name="line.56"></a>
-<span class="sourceLineNo">057</span>                .url(mUrl);<a name="line.57"></a>
-<span class="sourceLineNo">058</span>        requestBuilder.delete(body);<a name="line.58"></a>
-<span class="sourceLineNo">059</span>        return mInstance;<a name="line.59"></a>
-<span class="sourceLineNo">060</span>    }<a name="line.60"></a>
-<span class="sourceLineNo">061</span><a name="line.61"></a>
-<span class="sourceLineNo">062</span>    public HttpClient patch(String body) {<a name="line.62"></a>
-<span class="sourceLineNo">063</span>        MediaType JSON = MediaType.parse("application/json; charset=utf-8");<a name="line.63"></a>
-<span class="sourceLineNo">064</span>        requestBuilder = new Request.Builder()<a name="line.64"></a>
-<span class="sourceLineNo">065</span>                .url(mUrl);<a name="line.65"></a>
-<span class="sourceLineNo">066</span>        requestBuilder.patch(RequestBody.create(JSON, body));<a name="line.66"></a>
-<span class="sourceLineNo">067</span>        return mInstance;<a name="line.67"></a>
-<span class="sourceLineNo">068</span>    }<a name="line.68"></a>
-<span class="sourceLineNo">069</span><a name="line.69"></a>
-<span class="sourceLineNo">070</span>    public HttpClient post(String body) {<a name="line.70"></a>
-<span class="sourceLineNo">071</span>        MediaType JSON<a name="line.71"></a>
-<span class="sourceLineNo">072</span>                = MediaType.parse("application/json;charset=UTF-8");<a name="line.72"></a>
-<span class="sourceLineNo">073</span>        requestBuilder = new Request.Builder()<a name="line.73"></a>
-<span class="sourceLineNo">074</span>                .url(mUrl)<a name="line.74"></a>
-<span class="sourceLineNo">075</span>                .post(RequestBody.create(JSON, body));<a name="line.75"></a>
-<span class="sourceLineNo">076</span>        return mInstance;<a name="line.76"></a>
-<span class="sourceLineNo">077</span>    }<a name="line.77"></a>
-<span class="sourceLineNo">078</span><a name="line.78"></a>
-<span class="sourceLineNo">079</span>    public HttpClient post(RequestBody body) {<a name="line.79"></a>
-<span class="sourceLineNo">080</span>        requestBuilder = new Request.Builder()<a name="line.80"></a>
-<span class="sourceLineNo">081</span>                .url(mUrl)<a name="line.81"></a>
-<span class="sourceLineNo">082</span>                .post(body);<a name="line.82"></a>
-<span class="sourceLineNo">083</span>        return mInstance;<a name="line.83"></a>
-<span class="sourceLineNo">084</span>    }<a name="line.84"></a>
-<span class="sourceLineNo">085</span><a name="line.85"></a>
-<span class="sourceLineNo">086</span>    public HttpClient setCookie(String cookie) {<a name="line.86"></a>
-<span class="sourceLineNo">087</span>        requestBuilder.addHeader("Cookie", cookie);<a name="line.87"></a>
-<span class="sourceLineNo">088</span>        return mInstance;<a name="line.88"></a>
-<span class="sourceLineNo">089</span>    }<a name="line.89"></a>
-<span class="sourceLineNo">090</span><a name="line.90"></a>
-<span class="sourceLineNo">091</span>    public HttpClient setHeader(String key, String value) {<a name="line.91"></a>
-<span class="sourceLineNo">092</span>        requestBuilder.addHeader(key, value);<a name="line.92"></a>
-<span class="sourceLineNo">093</span>        return mInstance;<a name="line.93"></a>
-<span class="sourceLineNo">094</span>    }<a name="line.94"></a>
-<span class="sourceLineNo">095</span><a name="line.95"></a>
-<span class="sourceLineNo">096</span>    public HttpClient setHeaders(Map&lt;String, String&gt; headers) {<a name="line.96"></a>
-<span class="sourceLineNo">097</span>        requestBuilder.headers(Headers.of(headers));<a name="line.97"></a>
-<span class="sourceLineNo">098</span>        return mInstance;<a name="line.98"></a>
-<span class="sourceLineNo">099</span>    }<a name="line.99"></a>
-<span class="sourceLineNo">100</span><a name="line.100"></a>
-<span class="sourceLineNo">101</span>    public HttpClient setUserAgent(String agent) {<a name="line.101"></a>
-<span class="sourceLineNo">102</span>        requestBuilder.addHeader("User-Agent", agent);<a name="line.102"></a>
-<span class="sourceLineNo">103</span>        return mInstance;<a name="line.103"></a>
-<span class="sourceLineNo">104</span>    }<a name="line.104"></a>
-<span class="sourceLineNo">105</span><a name="line.105"></a>
-<span class="sourceLineNo">106</span>    public HttpClient setAuthHeader(String token) {<a name="line.106"></a>
-<span class="sourceLineNo">107</span>        requestBuilder.addHeader("Authorization", token);<a name="line.107"></a>
-<span class="sourceLineNo">108</span>        return mInstance;<a name="line.108"></a>
-<span class="sourceLineNo">109</span>    }<a name="line.109"></a>
-<span class="sourceLineNo">110</span><a name="line.110"></a>
-<span class="sourceLineNo">111</span>    public String execute(HttpCallback callback) {<a name="line.111"></a>
-<span class="sourceLineNo">112</span>        try {<a name="line.112"></a>
-<span class="sourceLineNo">113</span>            OkHttpClient okHttpClient = Instances.HTTP_CLIENT;<a name="line.113"></a>
-<span class="sourceLineNo">114</span>            Response okss = okHttpClient<a name="line.114"></a>
-<span class="sourceLineNo">115</span>                    .newCall(requestBuilder.build())<a name="line.115"></a>
-<span class="sourceLineNo">116</span>                    .execute();<a name="line.116"></a>
-<span class="sourceLineNo">117</span>            responseOk = okss;<a name="line.117"></a>
-<span class="sourceLineNo">118</span>            String response = okss<a name="line.118"></a>
-<span class="sourceLineNo">119</span>                    .body()<a name="line.119"></a>
-<span class="sourceLineNo">120</span>                    .string();<a name="line.120"></a>
-<span class="sourceLineNo">121</span>            if (callback != null)<a name="line.121"></a>
-<span class="sourceLineNo">122</span>                callback.onCompleted(null, response, okss.code());<a name="line.122"></a>
-<span class="sourceLineNo">123</span>            return response;<a name="line.123"></a>
-<span class="sourceLineNo">124</span>        } catch (Exception e) {<a name="line.124"></a>
-<span class="sourceLineNo">125</span>            if (callback != null)<a name="line.125"></a>
-<span class="sourceLineNo">126</span>                callback.onCompleted(e, null, 0);<a name="line.126"></a>
-<span class="sourceLineNo">127</span>            e.printStackTrace();<a name="line.127"></a>
-<span class="sourceLineNo">128</span>        }<a name="line.128"></a>
-<span class="sourceLineNo">129</span>        return null;<a name="line.129"></a>
-<span class="sourceLineNo">130</span>    }<a name="line.130"></a>
-<span class="sourceLineNo">131</span><a name="line.131"></a>
-<span class="sourceLineNo">132</span>    public String execute() {<a name="line.132"></a>
-<span class="sourceLineNo">133</span>        return execute(null);<a name="line.133"></a>
-<span class="sourceLineNo">134</span>    }<a name="line.134"></a>
-<span class="sourceLineNo">135</span><a name="line.135"></a>
-<span class="sourceLineNo">136</span>    public void executeAsync(final HttpCallback callback) {<a name="line.136"></a>
-<span class="sourceLineNo">137</span>        Instances.SCHEDULER.executeAsync(() -&gt; {<a name="line.137"></a>
-<span class="sourceLineNo">138</span>            String response = null;<a name="line.138"></a>
-<span class="sourceLineNo">139</span>            int code = 0;<a name="line.139"></a>
-<span class="sourceLineNo">140</span>            Throwable thr = null;<a name="line.140"></a>
-<span class="sourceLineNo">141</span>            try {<a name="line.141"></a>
-<span class="sourceLineNo">142</span>                OkHttpClient client = Instances.HTTP_CLIENT;<a name="line.142"></a>
-<span class="sourceLineNo">143</span>                Response okss = client<a name="line.143"></a>
-<span class="sourceLineNo">144</span>                    .newCall(requestBuilder.build())<a name="line.144"></a>
-<span class="sourceLineNo">145</span>                    .execute();<a name="line.145"></a>
-<span class="sourceLineNo">146</span>                response = okss.body().string();<a name="line.146"></a>
-<span class="sourceLineNo">147</span>                code = okss.code();<a name="line.147"></a>
-<span class="sourceLineNo">148</span>            } catch (Throwable thr1) {<a name="line.148"></a>
-<span class="sourceLineNo">149</span>                thr = thr1;<a name="line.149"></a>
-<span class="sourceLineNo">150</span>                response = null;<a name="line.150"></a>
-<span class="sourceLineNo">151</span>            }<a name="line.151"></a>
-<span class="sourceLineNo">152</span><a name="line.152"></a>
-<span class="sourceLineNo">153</span>            if (response != null) {<a name="line.153"></a>
-<span class="sourceLineNo">154</span>                callback.onCompleted(null, response, code);<a name="line.154"></a>
-<span class="sourceLineNo">155</span>            } else {<a name="line.155"></a>
-<span class="sourceLineNo">156</span>                callback.onCompleted(thr, null, code);<a name="line.156"></a>
-<span class="sourceLineNo">157</span>            }<a name="line.157"></a>
-<span class="sourceLineNo">158</span>        });<a name="line.158"></a>
-<span class="sourceLineNo">159</span>    }<a name="line.159"></a>
-<span class="sourceLineNo">160</span><a name="line.160"></a>
-<span class="sourceLineNo">161</span>    public void close() {<a name="line.161"></a>
-<span class="sourceLineNo">162</span>        try {<a name="line.162"></a>
-<span class="sourceLineNo">163</span>            responseOk.close();<a name="line.163"></a>
-<span class="sourceLineNo">164</span>        } catch (Throwable thr) {<a name="line.164"></a>
-<span class="sourceLineNo">165</span>            thr.printStackTrace();<a name="line.165"></a>
-<span class="sourceLineNo">166</span>        }<a name="line.166"></a>
-<span class="sourceLineNo">167</span>     }<a name="line.167"></a>
-<span class="sourceLineNo">168</span>}<a name="line.168"></a>
+<pre><span class="sourceLineNo">001</span><a id="line.1">/*</a>
+<span class="sourceLineNo">002</span><a id="line.2"> * This file is part of Library, licensed under the MIT License.</a>
+<span class="sourceLineNo">003</span><a id="line.3"> *</a>
+<span class="sourceLineNo">004</span><a id="line.4"> *  Copyright (c) 2021-2022 DeltaPvP</a>
+<span class="sourceLineNo">005</span><a id="line.5"> *  Copyright (c) 2021-2022 contributors</a>
+<span class="sourceLineNo">006</span><a id="line.6"> *</a>
+<span class="sourceLineNo">007</span><a id="line.7"> * Permission is hereby granted, free of charge, to any person obtaining a copy</a>
+<span class="sourceLineNo">008</span><a id="line.8"> * of this software and associated documentation files (the "Software"), to deal</a>
+<span class="sourceLineNo">009</span><a id="line.9"> * in the Software without restriction, including without limitation the rights</a>
+<span class="sourceLineNo">010</span><a id="line.10"> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</a>
+<span class="sourceLineNo">011</span><a id="line.11"> * copies of the Software, and to permit persons to whom the Software is</a>
+<span class="sourceLineNo">012</span><a id="line.12"> * furnished to do so, subject to the following conditions:</a>
+<span class="sourceLineNo">013</span><a id="line.13"> *</a>
+<span class="sourceLineNo">014</span><a id="line.14"> * The above copyright notice and this permission notice shall be included in all</a>
+<span class="sourceLineNo">015</span><a id="line.15"> * copies or substantial portions of the Software.</a>
+<span class="sourceLineNo">016</span><a id="line.16"> *</a>
+<span class="sourceLineNo">017</span><a id="line.17"> * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</a>
+<span class="sourceLineNo">018</span><a id="line.18"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</a>
+<span class="sourceLineNo">019</span><a id="line.19"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</a>
+<span class="sourceLineNo">020</span><a id="line.20"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</a>
+<span class="sourceLineNo">021</span><a id="line.21"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</a>
+<span class="sourceLineNo">022</span><a id="line.22"> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</a>
+<span class="sourceLineNo">023</span><a id="line.23"> * SOFTWARE.</a>
+<span class="sourceLineNo">024</span><a id="line.24"> */</a>
+<span class="sourceLineNo">025</span><a id="line.25">package net.deltapvp.library.common.util;</a>
+<span class="sourceLineNo">026</span><a id="line.26"></a>
+<span class="sourceLineNo">027</span><a id="line.27">import java.util.Map;</a>
+<span class="sourceLineNo">028</span><a id="line.28"></a>
+<span class="sourceLineNo">029</span><a id="line.29">import net.deltapvp.library.common.util.callbacks.HttpCallback;</a>
+<span class="sourceLineNo">030</span><a id="line.30">import okhttp3.Headers;</a>
+<span class="sourceLineNo">031</span><a id="line.31">import okhttp3.MediaType;</a>
+<span class="sourceLineNo">032</span><a id="line.32">import okhttp3.OkHttpClient;</a>
+<span class="sourceLineNo">033</span><a id="line.33">import okhttp3.Request;</a>
+<span class="sourceLineNo">034</span><a id="line.34">import okhttp3.RequestBody;</a>
+<span class="sourceLineNo">035</span><a id="line.35">import okhttp3.Response;</a>
+<span class="sourceLineNo">036</span><a id="line.36"></a>
+<span class="sourceLineNo">037</span><a id="line.37">public class HttpClient {</a>
+<span class="sourceLineNo">038</span><a id="line.38">    private static HttpClient mInstance = null;</a>
+<span class="sourceLineNo">039</span><a id="line.39">    private static String mUrl;</a>
+<span class="sourceLineNo">040</span><a id="line.40">    private Request.Builder requestBuilder;</a>
+<span class="sourceLineNo">041</span><a id="line.41">    private Response responseOk;</a>
+<span class="sourceLineNo">042</span><a id="line.42"></a>
+<span class="sourceLineNo">043</span><a id="line.43">    public static HttpClient load(String url) {</a>
+<span class="sourceLineNo">044</span><a id="line.44">        mInstance = new HttpClient();</a>
+<span class="sourceLineNo">045</span><a id="line.45">        mUrl = url;</a>
+<span class="sourceLineNo">046</span><a id="line.46">        return mInstance;</a>
+<span class="sourceLineNo">047</span><a id="line.47">    }</a>
+<span class="sourceLineNo">048</span><a id="line.48"></a>
+<span class="sourceLineNo">049</span><a id="line.49">    public HttpClient get() {</a>
+<span class="sourceLineNo">050</span><a id="line.50">        requestBuilder = new Request.Builder()</a>
+<span class="sourceLineNo">051</span><a id="line.51">                .url(mUrl);</a>
+<span class="sourceLineNo">052</span><a id="line.52">        return mInstance;</a>
+<span class="sourceLineNo">053</span><a id="line.53">    }</a>
+<span class="sourceLineNo">054</span><a id="line.54"></a>
+<span class="sourceLineNo">055</span><a id="line.55">    public HttpClient delete(RequestBody body) {</a>
+<span class="sourceLineNo">056</span><a id="line.56">        requestBuilder = new Request.Builder()</a>
+<span class="sourceLineNo">057</span><a id="line.57">                .url(mUrl);</a>
+<span class="sourceLineNo">058</span><a id="line.58">        requestBuilder.delete(body);</a>
+<span class="sourceLineNo">059</span><a id="line.59">        return mInstance;</a>
+<span class="sourceLineNo">060</span><a id="line.60">    }</a>
+<span class="sourceLineNo">061</span><a id="line.61"></a>
+<span class="sourceLineNo">062</span><a id="line.62">    public HttpClient patch(String body) {</a>
+<span class="sourceLineNo">063</span><a id="line.63">        MediaType JSON = MediaType.parse("application/json; charset=utf-8");</a>
+<span class="sourceLineNo">064</span><a id="line.64">        requestBuilder = new Request.Builder()</a>
+<span class="sourceLineNo">065</span><a id="line.65">                .url(mUrl);</a>
+<span class="sourceLineNo">066</span><a id="line.66">        requestBuilder.patch(RequestBody.create(JSON, body));</a>
+<span class="sourceLineNo">067</span><a id="line.67">        return mInstance;</a>
+<span class="sourceLineNo">068</span><a id="line.68">    }</a>
+<span class="sourceLineNo">069</span><a id="line.69"></a>
+<span class="sourceLineNo">070</span><a id="line.70">    public HttpClient post(String body) {</a>
+<span class="sourceLineNo">071</span><a id="line.71">        MediaType JSON</a>
+<span class="sourceLineNo">072</span><a id="line.72">                = MediaType.parse("application/json;charset=UTF-8");</a>
+<span class="sourceLineNo">073</span><a id="line.73">        requestBuilder = new Request.Builder()</a>
+<span class="sourceLineNo">074</span><a id="line.74">                .url(mUrl)</a>
+<span class="sourceLineNo">075</span><a id="line.75">                .post(RequestBody.create(JSON, body));</a>
+<span class="sourceLineNo">076</span><a id="line.76">        return mInstance;</a>
+<span class="sourceLineNo">077</span><a id="line.77">    }</a>
+<span class="sourceLineNo">078</span><a id="line.78"></a>
+<span class="sourceLineNo">079</span><a id="line.79">    public HttpClient post(RequestBody body) {</a>
+<span class="sourceLineNo">080</span><a id="line.80">        requestBuilder = new Request.Builder()</a>
+<span class="sourceLineNo">081</span><a id="line.81">                .url(mUrl)</a>
+<span class="sourceLineNo">082</span><a id="line.82">                .post(body);</a>
+<span class="sourceLineNo">083</span><a id="line.83">        return mInstance;</a>
+<span class="sourceLineNo">084</span><a id="line.84">    }</a>
+<span class="sourceLineNo">085</span><a id="line.85"></a>
+<span class="sourceLineNo">086</span><a id="line.86">    public HttpClient setCookie(String cookie) {</a>
+<span class="sourceLineNo">087</span><a id="line.87">        requestBuilder.addHeader("Cookie", cookie);</a>
+<span class="sourceLineNo">088</span><a id="line.88">        return mInstance;</a>
+<span class="sourceLineNo">089</span><a id="line.89">    }</a>
+<span class="sourceLineNo">090</span><a id="line.90"></a>
+<span class="sourceLineNo">091</span><a id="line.91">    public HttpClient setHeader(String key, String value) {</a>
+<span class="sourceLineNo">092</span><a id="line.92">        requestBuilder.addHeader(key, value);</a>
+<span class="sourceLineNo">093</span><a id="line.93">        return mInstance;</a>
+<span class="sourceLineNo">094</span><a id="line.94">    }</a>
+<span class="sourceLineNo">095</span><a id="line.95"></a>
+<span class="sourceLineNo">096</span><a id="line.96">    public HttpClient setHeaders(Map&lt;String, String&gt; headers) {</a>
+<span class="sourceLineNo">097</span><a id="line.97">        requestBuilder.headers(Headers.of(headers));</a>
+<span class="sourceLineNo">098</span><a id="line.98">        return mInstance;</a>
+<span class="sourceLineNo">099</span><a id="line.99">    }</a>
+<span class="sourceLineNo">100</span><a id="line.100"></a>
+<span class="sourceLineNo">101</span><a id="line.101">    public HttpClient setUserAgent(String agent) {</a>
+<span class="sourceLineNo">102</span><a id="line.102">        requestBuilder.addHeader("User-Agent", agent);</a>
+<span class="sourceLineNo">103</span><a id="line.103">        return mInstance;</a>
+<span class="sourceLineNo">104</span><a id="line.104">    }</a>
+<span class="sourceLineNo">105</span><a id="line.105"></a>
+<span class="sourceLineNo">106</span><a id="line.106">    public HttpClient setAuthHeader(String token) {</a>
+<span class="sourceLineNo">107</span><a id="line.107">        requestBuilder.addHeader("Authorization", token);</a>
+<span class="sourceLineNo">108</span><a id="line.108">        return mInstance;</a>
+<span class="sourceLineNo">109</span><a id="line.109">    }</a>
+<span class="sourceLineNo">110</span><a id="line.110"></a>
+<span class="sourceLineNo">111</span><a id="line.111">    public String execute(HttpCallback callback) {</a>
+<span class="sourceLineNo">112</span><a id="line.112">        try {</a>
+<span class="sourceLineNo">113</span><a id="line.113">            OkHttpClient okHttpClient = Instances.HTTP_CLIENT;</a>
+<span class="sourceLineNo">114</span><a id="line.114">            Response okss = okHttpClient</a>
+<span class="sourceLineNo">115</span><a id="line.115">                    .newCall(requestBuilder.build())</a>
+<span class="sourceLineNo">116</span><a id="line.116">                    .execute();</a>
+<span class="sourceLineNo">117</span><a id="line.117">            responseOk = okss;</a>
+<span class="sourceLineNo">118</span><a id="line.118">            String response = okss</a>
+<span class="sourceLineNo">119</span><a id="line.119">                    .body()</a>
+<span class="sourceLineNo">120</span><a id="line.120">                    .string();</a>
+<span class="sourceLineNo">121</span><a id="line.121">            if (callback != null)</a>
+<span class="sourceLineNo">122</span><a id="line.122">                callback.onCompleted(null, response, okss.code());</a>
+<span class="sourceLineNo">123</span><a id="line.123">            return response;</a>
+<span class="sourceLineNo">124</span><a id="line.124">        } catch (Exception e) {</a>
+<span class="sourceLineNo">125</span><a id="line.125">            if (callback != null)</a>
+<span class="sourceLineNo">126</span><a id="line.126">                callback.onCompleted(e, null, 0);</a>
+<span class="sourceLineNo">127</span><a id="line.127">            e.printStackTrace();</a>
+<span class="sourceLineNo">128</span><a id="line.128">        }</a>
+<span class="sourceLineNo">129</span><a id="line.129">        return null;</a>
+<span class="sourceLineNo">130</span><a id="line.130">    }</a>
+<span class="sourceLineNo">131</span><a id="line.131"></a>
+<span class="sourceLineNo">132</span><a id="line.132">    public String execute() {</a>
+<span class="sourceLineNo">133</span><a id="line.133">        return execute(null);</a>
+<span class="sourceLineNo">134</span><a id="line.134">    }</a>
+<span class="sourceLineNo">135</span><a id="line.135"></a>
+<span class="sourceLineNo">136</span><a id="line.136">    public void executeAsync(final HttpCallback callback) {</a>
+<span class="sourceLineNo">137</span><a id="line.137">        Instances.SCHEDULER.executeAsync(() -&gt; {</a>
+<span class="sourceLineNo">138</span><a id="line.138">            String response = null;</a>
+<span class="sourceLineNo">139</span><a id="line.139">            int code = 0;</a>
+<span class="sourceLineNo">140</span><a id="line.140">            Throwable thr = null;</a>
+<span class="sourceLineNo">141</span><a id="line.141">            try {</a>
+<span class="sourceLineNo">142</span><a id="line.142">                OkHttpClient client = Instances.HTTP_CLIENT;</a>
+<span class="sourceLineNo">143</span><a id="line.143">                Response okss = client</a>
+<span class="sourceLineNo">144</span><a id="line.144">                    .newCall(requestBuilder.build())</a>
+<span class="sourceLineNo">145</span><a id="line.145">                    .execute();</a>
+<span class="sourceLineNo">146</span><a id="line.146">                response = okss.body().string();</a>
+<span class="sourceLineNo">147</span><a id="line.147">                code = okss.code();</a>
+<span class="sourceLineNo">148</span><a id="line.148">            } catch (Throwable thr1) {</a>
+<span class="sourceLineNo">149</span><a id="line.149">                thr = thr1;</a>
+<span class="sourceLineNo">150</span><a id="line.150">                response = null;</a>
+<span class="sourceLineNo">151</span><a id="line.151">            }</a>
+<span class="sourceLineNo">152</span><a id="line.152"></a>
+<span class="sourceLineNo">153</span><a id="line.153">            if (response != null) {</a>
+<span class="sourceLineNo">154</span><a id="line.154">                callback.onCompleted(null, response, code);</a>
+<span class="sourceLineNo">155</span><a id="line.155">            } else {</a>
+<span class="sourceLineNo">156</span><a id="line.156">                callback.onCompleted(thr, null, code);</a>
+<span class="sourceLineNo">157</span><a id="line.157">            }</a>
+<span class="sourceLineNo">158</span><a id="line.158">        });</a>
+<span class="sourceLineNo">159</span><a id="line.159">    }</a>
+<span class="sourceLineNo">160</span><a id="line.160"></a>
+<span class="sourceLineNo">161</span><a id="line.161">    public void close() {</a>
+<span class="sourceLineNo">162</span><a id="line.162">        try {</a>
+<span class="sourceLineNo">163</span><a id="line.163">            responseOk.close();</a>
+<span class="sourceLineNo">164</span><a id="line.164">        } catch (Throwable thr) {</a>
+<span class="sourceLineNo">165</span><a id="line.165">            thr.printStackTrace();</a>
+<span class="sourceLineNo">166</span><a id="line.166">        }</a>
+<span class="sourceLineNo">167</span><a id="line.167">     }</a>
+<span class="sourceLineNo">168</span><a id="line.168">}</a>
 
 
 
@@ -236,5 +237,6 @@
 
 </pre>
 </div>
+</main>
 </body>
 </html>

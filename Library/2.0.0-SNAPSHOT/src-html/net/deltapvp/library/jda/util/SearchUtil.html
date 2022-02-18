@@ -1,117 +1,118 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
 <title>Source code</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
+<main role="main">
 <div class="sourceContainer">
-<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * This file is part of Library, licensed under the MIT License.<a name="line.2"></a>
-<span class="sourceLineNo">003</span> *<a name="line.3"></a>
-<span class="sourceLineNo">004</span> *  Copyright (c) 2021-2022 DeltaPvP<a name="line.4"></a>
-<span class="sourceLineNo">005</span> *  Copyright (c) 2021-2022 contributors<a name="line.5"></a>
-<span class="sourceLineNo">006</span> *<a name="line.6"></a>
-<span class="sourceLineNo">007</span> * Permission is hereby granted, free of charge, to any person obtaining a copy<a name="line.7"></a>
-<span class="sourceLineNo">008</span> * of this software and associated documentation files (the "Software"), to deal<a name="line.8"></a>
-<span class="sourceLineNo">009</span> * in the Software without restriction, including without limitation the rights<a name="line.9"></a>
-<span class="sourceLineNo">010</span> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<a name="line.10"></a>
-<span class="sourceLineNo">011</span> * copies of the Software, and to permit persons to whom the Software is<a name="line.11"></a>
-<span class="sourceLineNo">012</span> * furnished to do so, subject to the following conditions:<a name="line.12"></a>
-<span class="sourceLineNo">013</span> *<a name="line.13"></a>
-<span class="sourceLineNo">014</span> * The above copyright notice and this permission notice shall be included in all<a name="line.14"></a>
-<span class="sourceLineNo">015</span> * copies or substantial portions of the Software.<a name="line.15"></a>
-<span class="sourceLineNo">016</span> *<a name="line.16"></a>
-<span class="sourceLineNo">017</span> * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<a name="line.17"></a>
-<span class="sourceLineNo">018</span> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<a name="line.18"></a>
-<span class="sourceLineNo">019</span> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<a name="line.19"></a>
-<span class="sourceLineNo">020</span> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<a name="line.20"></a>
-<span class="sourceLineNo">021</span> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<a name="line.21"></a>
-<span class="sourceLineNo">022</span> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<a name="line.22"></a>
-<span class="sourceLineNo">023</span> * SOFTWARE.<a name="line.23"></a>
-<span class="sourceLineNo">024</span> */<a name="line.24"></a>
-<span class="sourceLineNo">025</span>package net.deltapvp.library.jda.util;<a name="line.25"></a>
-<span class="sourceLineNo">026</span><a name="line.26"></a>
-<span class="sourceLineNo">027</span>import net.dv8tion.jda.api.entities.Guild;<a name="line.27"></a>
-<span class="sourceLineNo">028</span>import net.dv8tion.jda.api.entities.Member;<a name="line.28"></a>
-<span class="sourceLineNo">029</span>import net.dv8tion.jda.api.entities.Role;<a name="line.29"></a>
-<span class="sourceLineNo">030</span>import net.dv8tion.jda.api.entities.TextChannel;<a name="line.30"></a>
-<span class="sourceLineNo">031</span><a name="line.31"></a>
-<span class="sourceLineNo">032</span>@SuppressWarnings("SpellCheckingInspection")<a name="line.32"></a>
-<span class="sourceLineNo">033</span>/**<a name="line.33"></a>
-<span class="sourceLineNo">034</span> * @author Larry<a name="line.34"></a>
-<span class="sourceLineNo">035</span> */<a name="line.35"></a>
-<span class="sourceLineNo">036</span>public class SearchUtil {<a name="line.36"></a>
-<span class="sourceLineNo">037</span><a name="line.37"></a>
-<span class="sourceLineNo">038</span>    static Member getSpelledUser(Guild server, String name) {<a name="line.38"></a>
-<span class="sourceLineNo">039</span>        for (Member user : server.getMembers()) {<a name="line.39"></a>
-<span class="sourceLineNo">040</span>            if (user.getEffectiveName().equalsIgnoreCase(name)) {<a name="line.40"></a>
-<span class="sourceLineNo">041</span>                return user;<a name="line.41"></a>
-<span class="sourceLineNo">042</span>            }<a name="line.42"></a>
-<span class="sourceLineNo">043</span>        }<a name="line.43"></a>
-<span class="sourceLineNo">044</span>        return null;<a name="line.44"></a>
-<span class="sourceLineNo">045</span>    }<a name="line.45"></a>
-<span class="sourceLineNo">046</span><a name="line.46"></a>
-<span class="sourceLineNo">047</span>    static Member getUserById(Guild server, String id) {<a name="line.47"></a>
-<span class="sourceLineNo">048</span>        for (Member user : server.getMembers()) {<a name="line.48"></a>
-<span class="sourceLineNo">049</span>            if (user.getId().equals(id)) {<a name="line.49"></a>
-<span class="sourceLineNo">050</span>                return user;<a name="line.50"></a>
-<span class="sourceLineNo">051</span>            }<a name="line.51"></a>
-<span class="sourceLineNo">052</span>        }<a name="line.52"></a>
-<span class="sourceLineNo">053</span>        return null;<a name="line.53"></a>
-<span class="sourceLineNo">054</span>    }<a name="line.54"></a>
-<span class="sourceLineNo">055</span><a name="line.55"></a>
-<span class="sourceLineNo">056</span>    public static Member getMember(Guild guild, String string) {<a name="line.56"></a>
-<span class="sourceLineNo">057</span>        Member result = getSpelledUser(guild, string);<a name="line.57"></a>
-<span class="sourceLineNo">058</span>        return result != null ? result : getUserById(guild, string);<a name="line.58"></a>
-<span class="sourceLineNo">059</span>    }<a name="line.59"></a>
-<span class="sourceLineNo">060</span><a name="line.60"></a>
-<span class="sourceLineNo">061</span>    static Role getSpelledRole(Guild server, String name) {<a name="line.61"></a>
-<span class="sourceLineNo">062</span>        for (Role roles : server.getRoles()) {<a name="line.62"></a>
-<span class="sourceLineNo">063</span>            if (roles.getName().equalsIgnoreCase(name)) {<a name="line.63"></a>
-<span class="sourceLineNo">064</span>                return roles;<a name="line.64"></a>
-<span class="sourceLineNo">065</span>            }<a name="line.65"></a>
-<span class="sourceLineNo">066</span>        }<a name="line.66"></a>
-<span class="sourceLineNo">067</span>        return null;<a name="line.67"></a>
-<span class="sourceLineNo">068</span>    }<a name="line.68"></a>
-<span class="sourceLineNo">069</span><a name="line.69"></a>
-<span class="sourceLineNo">070</span>    static Role getRoleById(Guild server, String id) {<a name="line.70"></a>
-<span class="sourceLineNo">071</span>        for (Role roles : server.getRoles()) {<a name="line.71"></a>
-<span class="sourceLineNo">072</span>            if (roles.getId().equals(id)) {<a name="line.72"></a>
-<span class="sourceLineNo">073</span>                return roles;<a name="line.73"></a>
-<span class="sourceLineNo">074</span>            }<a name="line.74"></a>
-<span class="sourceLineNo">075</span>        }<a name="line.75"></a>
-<span class="sourceLineNo">076</span>        return null;<a name="line.76"></a>
-<span class="sourceLineNo">077</span>    }<a name="line.77"></a>
-<span class="sourceLineNo">078</span><a name="line.78"></a>
-<span class="sourceLineNo">079</span>    public static Role getRole(Guild guild, String string) {<a name="line.79"></a>
-<span class="sourceLineNo">080</span>        Role result = getSpelledRole(guild, string);<a name="line.80"></a>
-<span class="sourceLineNo">081</span>        return result != null ? result : getRoleById(guild, string);<a name="line.81"></a>
-<span class="sourceLineNo">082</span>    }<a name="line.82"></a>
-<span class="sourceLineNo">083</span><a name="line.83"></a>
-<span class="sourceLineNo">084</span>    static TextChannel getSpelledChannel(Guild server, String name) {<a name="line.84"></a>
-<span class="sourceLineNo">085</span>        for (TextChannel channels : server.getTextChannels()) {<a name="line.85"></a>
-<span class="sourceLineNo">086</span>            if (channels.getName().equalsIgnoreCase(name)) {<a name="line.86"></a>
-<span class="sourceLineNo">087</span>                return channels;<a name="line.87"></a>
-<span class="sourceLineNo">088</span>            }<a name="line.88"></a>
-<span class="sourceLineNo">089</span>        }<a name="line.89"></a>
-<span class="sourceLineNo">090</span>        return null;<a name="line.90"></a>
-<span class="sourceLineNo">091</span>    }<a name="line.91"></a>
-<span class="sourceLineNo">092</span><a name="line.92"></a>
-<span class="sourceLineNo">093</span>    static TextChannel getChannelById(Guild server, String id) {<a name="line.93"></a>
-<span class="sourceLineNo">094</span>        for (TextChannel channels : server.getTextChannels()) {<a name="line.94"></a>
-<span class="sourceLineNo">095</span>            if (channels.getId().equals(id)) {<a name="line.95"></a>
-<span class="sourceLineNo">096</span>                return channels;<a name="line.96"></a>
-<span class="sourceLineNo">097</span>            }<a name="line.97"></a>
-<span class="sourceLineNo">098</span>        }<a name="line.98"></a>
-<span class="sourceLineNo">099</span>        return null;<a name="line.99"></a>
-<span class="sourceLineNo">100</span>    }<a name="line.100"></a>
-<span class="sourceLineNo">101</span><a name="line.101"></a>
-<span class="sourceLineNo">102</span>    public static TextChannel getChannel(Guild guild, String string) {<a name="line.102"></a>
-<span class="sourceLineNo">103</span>        TextChannel result = getSpelledChannel(guild, string);<a name="line.103"></a>
-<span class="sourceLineNo">104</span>        return result != null ? result : getChannelById(guild, string);<a name="line.104"></a>
-<span class="sourceLineNo">105</span>    }<a name="line.105"></a>
-<span class="sourceLineNo">106</span>}<a name="line.106"></a>
+<pre><span class="sourceLineNo">001</span><a id="line.1">/*</a>
+<span class="sourceLineNo">002</span><a id="line.2"> * This file is part of Library, licensed under the MIT License.</a>
+<span class="sourceLineNo">003</span><a id="line.3"> *</a>
+<span class="sourceLineNo">004</span><a id="line.4"> *  Copyright (c) 2021-2022 DeltaPvP</a>
+<span class="sourceLineNo">005</span><a id="line.5"> *  Copyright (c) 2021-2022 contributors</a>
+<span class="sourceLineNo">006</span><a id="line.6"> *</a>
+<span class="sourceLineNo">007</span><a id="line.7"> * Permission is hereby granted, free of charge, to any person obtaining a copy</a>
+<span class="sourceLineNo">008</span><a id="line.8"> * of this software and associated documentation files (the "Software"), to deal</a>
+<span class="sourceLineNo">009</span><a id="line.9"> * in the Software without restriction, including without limitation the rights</a>
+<span class="sourceLineNo">010</span><a id="line.10"> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</a>
+<span class="sourceLineNo">011</span><a id="line.11"> * copies of the Software, and to permit persons to whom the Software is</a>
+<span class="sourceLineNo">012</span><a id="line.12"> * furnished to do so, subject to the following conditions:</a>
+<span class="sourceLineNo">013</span><a id="line.13"> *</a>
+<span class="sourceLineNo">014</span><a id="line.14"> * The above copyright notice and this permission notice shall be included in all</a>
+<span class="sourceLineNo">015</span><a id="line.15"> * copies or substantial portions of the Software.</a>
+<span class="sourceLineNo">016</span><a id="line.16"> *</a>
+<span class="sourceLineNo">017</span><a id="line.17"> * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</a>
+<span class="sourceLineNo">018</span><a id="line.18"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</a>
+<span class="sourceLineNo">019</span><a id="line.19"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</a>
+<span class="sourceLineNo">020</span><a id="line.20"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</a>
+<span class="sourceLineNo">021</span><a id="line.21"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</a>
+<span class="sourceLineNo">022</span><a id="line.22"> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</a>
+<span class="sourceLineNo">023</span><a id="line.23"> * SOFTWARE.</a>
+<span class="sourceLineNo">024</span><a id="line.24"> */</a>
+<span class="sourceLineNo">025</span><a id="line.25">package net.deltapvp.library.jda.util;</a>
+<span class="sourceLineNo">026</span><a id="line.26"></a>
+<span class="sourceLineNo">027</span><a id="line.27">import net.dv8tion.jda.api.entities.Guild;</a>
+<span class="sourceLineNo">028</span><a id="line.28">import net.dv8tion.jda.api.entities.Member;</a>
+<span class="sourceLineNo">029</span><a id="line.29">import net.dv8tion.jda.api.entities.Role;</a>
+<span class="sourceLineNo">030</span><a id="line.30">import net.dv8tion.jda.api.entities.TextChannel;</a>
+<span class="sourceLineNo">031</span><a id="line.31"></a>
+<span class="sourceLineNo">032</span><a id="line.32">@SuppressWarnings("SpellCheckingInspection")</a>
+<span class="sourceLineNo">033</span><a id="line.33">/**</a>
+<span class="sourceLineNo">034</span><a id="line.34"> * @author Larry</a>
+<span class="sourceLineNo">035</span><a id="line.35"> */</a>
+<span class="sourceLineNo">036</span><a id="line.36">public class SearchUtil {</a>
+<span class="sourceLineNo">037</span><a id="line.37"></a>
+<span class="sourceLineNo">038</span><a id="line.38">    static Member getSpelledUser(Guild server, String name) {</a>
+<span class="sourceLineNo">039</span><a id="line.39">        for (Member user : server.getMembers()) {</a>
+<span class="sourceLineNo">040</span><a id="line.40">            if (user.getEffectiveName().equalsIgnoreCase(name)) {</a>
+<span class="sourceLineNo">041</span><a id="line.41">                return user;</a>
+<span class="sourceLineNo">042</span><a id="line.42">            }</a>
+<span class="sourceLineNo">043</span><a id="line.43">        }</a>
+<span class="sourceLineNo">044</span><a id="line.44">        return null;</a>
+<span class="sourceLineNo">045</span><a id="line.45">    }</a>
+<span class="sourceLineNo">046</span><a id="line.46"></a>
+<span class="sourceLineNo">047</span><a id="line.47">    static Member getUserById(Guild server, String id) {</a>
+<span class="sourceLineNo">048</span><a id="line.48">        for (Member user : server.getMembers()) {</a>
+<span class="sourceLineNo">049</span><a id="line.49">            if (user.getId().equals(id)) {</a>
+<span class="sourceLineNo">050</span><a id="line.50">                return user;</a>
+<span class="sourceLineNo">051</span><a id="line.51">            }</a>
+<span class="sourceLineNo">052</span><a id="line.52">        }</a>
+<span class="sourceLineNo">053</span><a id="line.53">        return null;</a>
+<span class="sourceLineNo">054</span><a id="line.54">    }</a>
+<span class="sourceLineNo">055</span><a id="line.55"></a>
+<span class="sourceLineNo">056</span><a id="line.56">    public static Member getMember(Guild guild, String string) {</a>
+<span class="sourceLineNo">057</span><a id="line.57">        Member result = getSpelledUser(guild, string);</a>
+<span class="sourceLineNo">058</span><a id="line.58">        return result != null ? result : getUserById(guild, string);</a>
+<span class="sourceLineNo">059</span><a id="line.59">    }</a>
+<span class="sourceLineNo">060</span><a id="line.60"></a>
+<span class="sourceLineNo">061</span><a id="line.61">    static Role getSpelledRole(Guild server, String name) {</a>
+<span class="sourceLineNo">062</span><a id="line.62">        for (Role roles : server.getRoles()) {</a>
+<span class="sourceLineNo">063</span><a id="line.63">            if (roles.getName().equalsIgnoreCase(name)) {</a>
+<span class="sourceLineNo">064</span><a id="line.64">                return roles;</a>
+<span class="sourceLineNo">065</span><a id="line.65">            }</a>
+<span class="sourceLineNo">066</span><a id="line.66">        }</a>
+<span class="sourceLineNo">067</span><a id="line.67">        return null;</a>
+<span class="sourceLineNo">068</span><a id="line.68">    }</a>
+<span class="sourceLineNo">069</span><a id="line.69"></a>
+<span class="sourceLineNo">070</span><a id="line.70">    static Role getRoleById(Guild server, String id) {</a>
+<span class="sourceLineNo">071</span><a id="line.71">        for (Role roles : server.getRoles()) {</a>
+<span class="sourceLineNo">072</span><a id="line.72">            if (roles.getId().equals(id)) {</a>
+<span class="sourceLineNo">073</span><a id="line.73">                return roles;</a>
+<span class="sourceLineNo">074</span><a id="line.74">            }</a>
+<span class="sourceLineNo">075</span><a id="line.75">        }</a>
+<span class="sourceLineNo">076</span><a id="line.76">        return null;</a>
+<span class="sourceLineNo">077</span><a id="line.77">    }</a>
+<span class="sourceLineNo">078</span><a id="line.78"></a>
+<span class="sourceLineNo">079</span><a id="line.79">    public static Role getRole(Guild guild, String string) {</a>
+<span class="sourceLineNo">080</span><a id="line.80">        Role result = getSpelledRole(guild, string);</a>
+<span class="sourceLineNo">081</span><a id="line.81">        return result != null ? result : getRoleById(guild, string);</a>
+<span class="sourceLineNo">082</span><a id="line.82">    }</a>
+<span class="sourceLineNo">083</span><a id="line.83"></a>
+<span class="sourceLineNo">084</span><a id="line.84">    static TextChannel getSpelledChannel(Guild server, String name) {</a>
+<span class="sourceLineNo">085</span><a id="line.85">        for (TextChannel channels : server.getTextChannels()) {</a>
+<span class="sourceLineNo">086</span><a id="line.86">            if (channels.getName().equalsIgnoreCase(name)) {</a>
+<span class="sourceLineNo">087</span><a id="line.87">                return channels;</a>
+<span class="sourceLineNo">088</span><a id="line.88">            }</a>
+<span class="sourceLineNo">089</span><a id="line.89">        }</a>
+<span class="sourceLineNo">090</span><a id="line.90">        return null;</a>
+<span class="sourceLineNo">091</span><a id="line.91">    }</a>
+<span class="sourceLineNo">092</span><a id="line.92"></a>
+<span class="sourceLineNo">093</span><a id="line.93">    static TextChannel getChannelById(Guild server, String id) {</a>
+<span class="sourceLineNo">094</span><a id="line.94">        for (TextChannel channels : server.getTextChannels()) {</a>
+<span class="sourceLineNo">095</span><a id="line.95">            if (channels.getId().equals(id)) {</a>
+<span class="sourceLineNo">096</span><a id="line.96">                return channels;</a>
+<span class="sourceLineNo">097</span><a id="line.97">            }</a>
+<span class="sourceLineNo">098</span><a id="line.98">        }</a>
+<span class="sourceLineNo">099</span><a id="line.99">        return null;</a>
+<span class="sourceLineNo">100</span><a id="line.100">    }</a>
+<span class="sourceLineNo">101</span><a id="line.101"></a>
+<span class="sourceLineNo">102</span><a id="line.102">    public static TextChannel getChannel(Guild guild, String string) {</a>
+<span class="sourceLineNo">103</span><a id="line.103">        TextChannel result = getSpelledChannel(guild, string);</a>
+<span class="sourceLineNo">104</span><a id="line.104">        return result != null ? result : getChannelById(guild, string);</a>
+<span class="sourceLineNo">105</span><a id="line.105">    }</a>
+<span class="sourceLineNo">106</span><a id="line.106">}</a>
 
 
 
@@ -174,5 +175,6 @@
 
 </pre>
 </div>
+</main>
 </body>
 </html>
