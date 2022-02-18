@@ -134,7 +134,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html?is-external=true" title="class or interface in java.lang" class="externalLink">AutoCloseable</a></code></dd>
 </dl>
 <hr>
-<pre>public final class <a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.44">Pyrite</a>
+<pre>public final class <span class="typeNameLabel">Pyrite</span>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
 implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html?is-external=true" title="class or interface in java.lang" class="externalLink">AutoCloseable</a></pre>
 </li>
@@ -310,7 +310,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockListLast">
 <li class="blockList">
 <h4>GSON</h4>
-<pre>public static&nbsp;com.google.gson.Gson <a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.49">GSON</a></pre>
+<pre>public static&nbsp;com.google.gson.Gson GSON</pre>
 </li>
 </ul>
 </li>
@@ -329,7 +329,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>Pyrite</h4>
-<pre>public&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.60">Pyrite</a>&#8203;(@NotNull
+<pre>public&nbsp;Pyrite&#8203;(@NotNull
               @NotNull <a href="PyriteCredentials.html" title="class in net.deltapvp.pyrite">PyriteCredentials</a>&nbsp;credentials)</pre>
 <div class="block">Pyrite.</div>
 <dl>
@@ -344,7 +344,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockListLast">
 <li class="blockList">
 <h4>Pyrite</h4>
-<pre>public&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.70">Pyrite</a>&#8203;(@NotNull
+<pre>public&nbsp;Pyrite&#8203;(@NotNull
               @NotNull <a href="PyriteCredentials.html" title="class in net.deltapvp.pyrite">PyriteCredentials</a>&nbsp;credentials,
               @Nullable
               @Nullable com.google.gson.Gson&nbsp;gson)</pre>
@@ -372,7 +372,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>registerContainer</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.87">registerContainer</a>&#8203;(<a href="packet/PacketContainer.html" title="interface in net.deltapvp.pyrite.packet">PacketContainer</a>&nbsp;packetContainer)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;registerContainer&#8203;(<a href="packet/PacketContainer.html" title="interface in net.deltapvp.pyrite.packet">PacketContainer</a>&nbsp;packetContainer)</pre>
 <div class="block">Register Packet Container.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -386,7 +386,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>unregisterContainer</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.96">unregisterContainer</a>&#8203;(<a href="packet/PacketContainer.html" title="interface in net.deltapvp.pyrite.packet">PacketContainer</a>&nbsp;packetContainer)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;unregisterContainer&#8203;(<a href="packet/PacketContainer.html" title="interface in net.deltapvp.pyrite.packet">PacketContainer</a>&nbsp;packetContainer)</pre>
 <div class="block">Unregister Packet Container.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -400,7 +400,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>runRedisCommand</h4>
-<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.106">runRedisCommand</a>&#8203;(<a href="util/RedisCommand.html" title="interface in net.deltapvp.pyrite.util">RedisCommand</a>&lt;T&gt;&nbsp;command)</pre>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;runRedisCommand&#8203;(<a href="util/RedisCommand.html" title="interface in net.deltapvp.pyrite.util">RedisCommand</a>&lt;T&gt;&nbsp;command)</pre>
 <div class="block">Run Redis Command.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -416,7 +416,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>close</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.129">close</a>()</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;close()</pre>
 <div class="block">Close Pyrite instance.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -430,7 +430,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>isActive</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.150">isActive</a>()</pre>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;isActive()</pre>
 <div class="block">Check whether the connection to the pool is currently active or closed.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -444,7 +444,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>attemptAuth</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.159">attemptAuth</a>&#8203;(redis.clients.jedis.Jedis&nbsp;jedis)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;attemptAuth&#8203;(redis.clients.jedis.Jedis&nbsp;jedis)</pre>
 <div class="block">Attempt to authenticate Jedis instance (if needed) from current credentials.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -458,7 +458,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>sendPacket</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.170">sendPacket</a>&#8203;(<a href="packet/Packet.html" title="class in net.deltapvp.pyrite.packet">Packet</a>&nbsp;packet,
+<pre class="methodSignature">public&nbsp;void&nbsp;sendPacket&#8203;(<a href="packet/Packet.html" title="class in net.deltapvp.pyrite.packet">Packet</a>&nbsp;packet,
                        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;channel)</pre>
 <div class="block">Send Pyrite Packet to PubSub.</div>
 <dl>
@@ -473,7 +473,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>getSubscription</h4>
-<pre class="methodSignature">public&nbsp;<a href="PyriteSubscription.html" title="class in net.deltapvp.pyrite">PyriteSubscription</a>&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.191">getSubscription</a>()</pre>
+<pre class="methodSignature">public&nbsp;<a href="PyriteSubscription.html" title="class in net.deltapvp.pyrite">PyriteSubscription</a>&nbsp;getSubscription()</pre>
 </li>
 </ul>
 <a id="getPool()">
@@ -482,7 +482,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>getPool</h4>
-<pre class="methodSignature">public&nbsp;redis.clients.jedis.JedisPool&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.195">getPool</a>()</pre>
+<pre class="methodSignature">public&nbsp;redis.clients.jedis.JedisPool&nbsp;getPool()</pre>
 </li>
 </ul>
 <a id="getContainers()">
@@ -491,7 +491,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockList">
 <li class="blockList">
 <h4>getContainers</h4>
-<pre class="methodSignature">public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="packet/PacketContainer.html" title="interface in net.deltapvp.pyrite.packet">PacketContainer</a>&gt;&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.199">getContainers</a>()</pre>
+<pre class="methodSignature">public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="packet/PacketContainer.html" title="interface in net.deltapvp.pyrite.packet">PacketContainer</a>&gt;&nbsp;getContainers()</pre>
 </li>
 </ul>
 <a id="getCredentials()">
@@ -500,7 +500,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoClos
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getCredentials</h4>
-<pre class="methodSignature">public&nbsp;<a href="PyriteCredentials.html" title="class in net.deltapvp.pyrite">PyriteCredentials</a>&nbsp;<a href="../../../src-html/net/deltapvp/pyrite/Pyrite.html#line.203">getCredentials</a>()</pre>
+<pre class="methodSignature">public&nbsp;<a href="PyriteCredentials.html" title="class in net.deltapvp.pyrite">PyriteCredentials</a>&nbsp;getCredentials()</pre>
 </li>
 </ul>
 </li>
