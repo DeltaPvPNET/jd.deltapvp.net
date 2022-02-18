@@ -10,7 +10,7 @@
 library:
     name: Library
     url: https://github.com/DeltaPvPNET/Library
-    group: "Library"
+    group: ""
 pyrite:
     name: Pyrite
     url: https://github.com/DeltaPvPNET/Pyrite
