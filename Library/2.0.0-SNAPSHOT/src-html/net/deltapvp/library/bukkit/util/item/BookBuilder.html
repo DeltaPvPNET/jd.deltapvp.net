@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<main role="main">
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span><a id="line.1">/*</a>
+<span class="sourceLineNo">002</span><a id="line.2"> * This file is part of Library, licensed under the MIT License.</a>
+<span class="sourceLineNo">003</span><a id="line.3"> *</a>
+<span class="sourceLineNo">004</span><a id="line.4"> *  Copyright (c) 2021-2022 DeltaPvP</a>
+<span class="sourceLineNo">005</span><a id="line.5"> *  Copyright (c) 2021-2022 contributors</a>
+<span class="sourceLineNo">006</span><a id="line.6"> *</a>
+<span class="sourceLineNo">007</span><a id="line.7"> * Permission is hereby granted, free of charge, to any person obtaining a copy</a>
+<span class="sourceLineNo">008</span><a id="line.8"> * of this software and associated documentation files (the "Software"), to deal</a>
+<span class="sourceLineNo">009</span><a id="line.9"> * in the Software without restriction, including without limitation the rights</a>
+<span class="sourceLineNo">010</span><a id="line.10"> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</a>
+<span class="sourceLineNo">011</span><a id="line.11"> * copies of the Software, and to permit persons to whom the Software is</a>
+<span class="sourceLineNo">012</span><a id="line.12"> * furnished to do so, subject to the following conditions:</a>
+<span class="sourceLineNo">013</span><a id="line.13"> *</a>
+<span class="sourceLineNo">014</span><a id="line.14"> * The above copyright notice and this permission notice shall be included in all</a>
+<span class="sourceLineNo">015</span><a id="line.15"> * copies or substantial portions of the Software.</a>
+<span class="sourceLineNo">016</span><a id="line.16"> *</a>
+<span class="sourceLineNo">017</span><a id="line.17"> * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</a>
+<span class="sourceLineNo">018</span><a id="line.18"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</a>
+<span class="sourceLineNo">019</span><a id="line.19"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</a>
+<span class="sourceLineNo">020</span><a id="line.20"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</a>
+<span class="sourceLineNo">021</span><a id="line.21"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</a>
+<span class="sourceLineNo">022</span><a id="line.22"> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</a>
+<span class="sourceLineNo">023</span><a id="line.23"> * SOFTWARE.</a>
+<span class="sourceLineNo">024</span><a id="line.24"> */</a>
+<span class="sourceLineNo">025</span><a id="line.25">package net.deltapvp.library.bukkit.util.item;</a>
+<span class="sourceLineNo">026</span><a id="line.26"></a>
+<span class="sourceLineNo">027</span><a id="line.27">import net.deltapvp.library.bukkit.util.VersionHelper;</a>
+<span class="sourceLineNo">028</span><a id="line.28">import net.deltapvp.library.common.util.Instances;</a>
+<span class="sourceLineNo">029</span><a id="line.29">import net.deltapvp.library.common.util.text.MessageType;</a>
+<span class="sourceLineNo">030</span><a id="line.30">import net.deltapvp.library.common.util.text.TextUtil;</a>
+<span class="sourceLineNo">031</span><a id="line.31">import net.kyori.adventure.text.Component;</a>
+<span class="sourceLineNo">032</span><a id="line.32">import org.bukkit.Material;</a>
+<span class="sourceLineNo">033</span><a id="line.33">import org.bukkit.inventory.ItemStack;</a>
+<span class="sourceLineNo">034</span><a id="line.34">import org.bukkit.inventory.meta.BookMeta;</a>
+<span class="sourceLineNo">035</span><a id="line.35">import org.jetbrains.annotations.Contract;</a>
+<span class="sourceLineNo">036</span><a id="line.36">import org.jetbrains.annotations.NotNull;</a>
+<span class="sourceLineNo">037</span><a id="line.37">import org.jetbrains.annotations.Nullable;</a>
+<span class="sourceLineNo">038</span><a id="line.38"></a>
+<span class="sourceLineNo">039</span><a id="line.39">import java.util.Arrays;</a>
+<span class="sourceLineNo">040</span><a id="line.40">import java.util.EnumSet;</a>
+<span class="sourceLineNo">041</span><a id="line.41">import java.util.List;</a>
+<span class="sourceLineNo">042</span><a id="line.42"></a>
+<span class="sourceLineNo">043</span><a id="line.43">/**</a>
+<span class="sourceLineNo">044</span><a id="line.44"> * Item builder for {@link Material#WRITTEN_BOOK} and {@link Material#WRITTEN_BOOK} only</a>
+<span class="sourceLineNo">045</span><a id="line.45"> *</a>
+<span class="sourceLineNo">046</span><a id="line.46"> * @author GabyTM &lt;a href="https://github.com/iGabyTM"&gt;https://github.com/iGabyTM&lt;/a&gt;</a>
+<span class="sourceLineNo">047</span><a id="line.47"> * @since 3.0.1</a>
+<span class="sourceLineNo">048</span><a id="line.48"> */</a>
+<span class="sourceLineNo">049</span><a id="line.49">@SuppressWarnings("deprecation")</a>
+<span class="sourceLineNo">050</span><a id="line.50">public class BookBuilder extends BaseItemBuilder&lt;BookBuilder&gt; {</a>
+<span class="sourceLineNo">051</span><a id="line.51"></a>
+<span class="sourceLineNo">052</span><a id="line.52">    private static final EnumSet&lt;Material&gt; BOOKS = EnumSet.of(Material.WRITABLE_BOOK, Material.WRITTEN_BOOK);</a>
+<span class="sourceLineNo">053</span><a id="line.53"></a>
+<span class="sourceLineNo">054</span><a id="line.54">    BookBuilder(@NotNull ItemStack itemStack) {</a>
+<span class="sourceLineNo">055</span><a id="line.55">        super(itemStack);</a>
+<span class="sourceLineNo">056</span><a id="line.56">        if (!BOOKS.contains(itemStack.getType())) {</a>
+<span class="sourceLineNo">057</span><a id="line.57">            throw new RuntimeException("BookBuilder requires the material to be a WRITABLE_BOOK/WRITTEN_BOOK!");</a>
+<span class="sourceLineNo">058</span><a id="line.58">        }</a>
+<span class="sourceLineNo">059</span><a id="line.59">    }</a>
+<span class="sourceLineNo">060</span><a id="line.60"></a>
+<span class="sourceLineNo">061</span><a id="line.61">    /**</a>
+<span class="sourceLineNo">062</span><a id="line.62">     * Sets the author of the book. Removes author when given null.</a>
+<span class="sourceLineNo">063</span><a id="line.63">     *</a>
+<span class="sourceLineNo">064</span><a id="line.64">     * @param author the author to set</a>
+<span class="sourceLineNo">065</span><a id="line.65">     * @return {@link BookBuilder}</a>
+<span class="sourceLineNo">066</span><a id="line.66">     * @since 3.0.1</a>
+<span class="sourceLineNo">067</span><a id="line.67">     */</a>
+<span class="sourceLineNo">068</span><a id="line.68">    @NotNull</a>
+<span class="sourceLineNo">069</span><a id="line.69">    @Contract("_ -&gt; this")</a>
+<span class="sourceLineNo">070</span><a id="line.70">    public BookBuilder author(@Nullable final Component author) {</a>
+<span class="sourceLineNo">071</span><a id="line.71">        final BookMeta bookMeta = (BookMeta) getMeta();</a>
+<span class="sourceLineNo">072</span><a id="line.72"></a>
+<span class="sourceLineNo">073</span><a id="line.73">        if (author == null) {</a>
+<span class="sourceLineNo">074</span><a id="line.74">            bookMeta.setAuthor(null);</a>
+<span class="sourceLineNo">075</span><a id="line.75">            setMeta(bookMeta);</a>
+<span class="sourceLineNo">076</span><a id="line.76">            return this;</a>
+<span class="sourceLineNo">077</span><a id="line.77">        }</a>
+<span class="sourceLineNo">078</span><a id="line.78"></a>
+<span class="sourceLineNo">079</span><a id="line.79">        bookMeta.setAuthor(TextUtil.unparse(author, MessageType.LEGACY_STUPID));</a>
+<span class="sourceLineNo">080</span><a id="line.80">        setMeta(bookMeta);</a>
+<span class="sourceLineNo">081</span><a id="line.81">        return this;</a>
+<span class="sourceLineNo">082</span><a id="line.82">    }</a>
+<span class="sourceLineNo">083</span><a id="line.83"></a>
+<span class="sourceLineNo">084</span><a id="line.84">    /**</a>
+<span class="sourceLineNo">085</span><a id="line.85">     * Sets the generation of the book. Removes generation when given null.</a>
+<span class="sourceLineNo">086</span><a id="line.86">     *</a>
+<span class="sourceLineNo">087</span><a id="line.87">     * @param generation the generation to set</a>
+<span class="sourceLineNo">088</span><a id="line.88">     * @return {@link BookBuilder}</a>
+<span class="sourceLineNo">089</span><a id="line.89">     * @since 3.0.1</a>
+<span class="sourceLineNo">090</span><a id="line.90">     */</a>
+<span class="sourceLineNo">091</span><a id="line.91">    @NotNull</a>
+<span class="sourceLineNo">092</span><a id="line.92">    @Contract("_ -&gt; this")</a>
+<span class="sourceLineNo">093</span><a id="line.93">    public BookBuilder generation(@Nullable final BookMeta.Generation generation) {</a>
+<span class="sourceLineNo">094</span><a id="line.94">        final BookMeta bookMeta = (BookMeta) getMeta();</a>
+<span class="sourceLineNo">095</span><a id="line.95"></a>
+<span class="sourceLineNo">096</span><a id="line.96">        bookMeta.setGeneration(generation);</a>
+<span class="sourceLineNo">097</span><a id="line.97">        setMeta(bookMeta);</a>
+<span class="sourceLineNo">098</span><a id="line.98">        return this;</a>
+<span class="sourceLineNo">099</span><a id="line.99">    }</a>
+<span class="sourceLineNo">100</span><a id="line.100"></a>
+<span class="sourceLineNo">101</span><a id="line.101">    /**</a>
+<span class="sourceLineNo">102</span><a id="line.102">     * Adds new pages to the end of the book. Up to a maximum of 50 pages with</a>
+<span class="sourceLineNo">103</span><a id="line.103">     * 256 characters per page.</a>
+<span class="sourceLineNo">104</span><a id="line.104">     *</a>
+<span class="sourceLineNo">105</span><a id="line.105">     * @param pages list of pages</a>
+<span class="sourceLineNo">106</span><a id="line.106">     * @return {@link BookBuilder}</a>
+<span class="sourceLineNo">107</span><a id="line.107">     * @since 3.0.1</a>
+<span class="sourceLineNo">108</span><a id="line.108">     */</a>
+<span class="sourceLineNo">109</span><a id="line.109">    @NotNull</a>
+<span class="sourceLineNo">110</span><a id="line.110">    @Contract("_ -&gt; this")</a>
+<span class="sourceLineNo">111</span><a id="line.111">    public BookBuilder page(@NotNull final Component... pages) {</a>
+<span class="sourceLineNo">112</span><a id="line.112">        return page(Arrays.asList(pages));</a>
+<span class="sourceLineNo">113</span><a id="line.113">    }</a>
+<span class="sourceLineNo">114</span><a id="line.114"></a>
+<span class="sourceLineNo">115</span><a id="line.115">    /**</a>
+<span class="sourceLineNo">116</span><a id="line.116">     * Adds new pages to the end of the book. Up to a maximum of 50 pages with</a>
+<span class="sourceLineNo">117</span><a id="line.117">     * 256 characters per page.</a>
+<span class="sourceLineNo">118</span><a id="line.118">     *</a>
+<span class="sourceLineNo">119</span><a id="line.119">     * @param pages list of pages</a>
+<span class="sourceLineNo">120</span><a id="line.120">     * @return {@link BookBuilder}</a>
+<span class="sourceLineNo">121</span><a id="line.121">     * @since 3.0.1</a>
+<span class="sourceLineNo">122</span><a id="line.122">     */</a>
+<span class="sourceLineNo">123</span><a id="line.123">    @NotNull</a>
+<span class="sourceLineNo">124</span><a id="line.124">    @Contract("_ -&gt; this")</a>
+<span class="sourceLineNo">125</span><a id="line.125">    public BookBuilder page(@NotNull final List&lt;Component&gt; pages) {</a>
+<span class="sourceLineNo">126</span><a id="line.126">        final BookMeta bookMeta = (BookMeta) getMeta();</a>
+<span class="sourceLineNo">127</span><a id="line.127"></a>
+<span class="sourceLineNo">128</span><a id="line.128">        for (final Component page : pages) {</a>
+<span class="sourceLineNo">129</span><a id="line.129">            if (VersionHelper.IS_COMPONENT_LEGACY) {</a>
+<span class="sourceLineNo">130</span><a id="line.130">                bookMeta.addPage(TextUtil.unparse(page, MessageType.LEGACY_STUPID));</a>
+<span class="sourceLineNo">131</span><a id="line.131">            } else {</a>
+<span class="sourceLineNo">132</span><a id="line.132">                bookMeta.addPages(page);</a>
+<span class="sourceLineNo">133</span><a id="line.133">            }</a>
+<span class="sourceLineNo">134</span><a id="line.134">        }</a>
+<span class="sourceLineNo">135</span><a id="line.135"></a>
+<span class="sourceLineNo">136</span><a id="line.136">        setMeta(bookMeta);</a>
+<span class="sourceLineNo">137</span><a id="line.137">        return this;</a>
+<span class="sourceLineNo">138</span><a id="line.138">    }</a>
+<span class="sourceLineNo">139</span><a id="line.139"></a>
+<span class="sourceLineNo">140</span><a id="line.140">    /**</a>
+<span class="sourceLineNo">141</span><a id="line.141">     * Sets the specified page in the book. Pages of the book must be</a>
+<span class="sourceLineNo">142</span><a id="line.142">     * contiguous.</a>
+<span class="sourceLineNo">143</span><a id="line.143">     * &lt;p&gt;</a>
+<span class="sourceLineNo">144</span><a id="line.144">     * The data can be up to 256 characters in length, additional characters</a>
+<span class="sourceLineNo">145</span><a id="line.145">     * are truncated.</a>
+<span class="sourceLineNo">146</span><a id="line.146">     * &lt;p&gt;</a>
+<span class="sourceLineNo">147</span><a id="line.147">     * Pages are 1-indexed.</a>
+<span class="sourceLineNo">148</span><a id="line.148">     *</a>
+<span class="sourceLineNo">149</span><a id="line.149">     * @param page the page number to set, in range [1, {@link BookMeta#getPageCount()}]</a>
+<span class="sourceLineNo">150</span><a id="line.150">     * @param data the data to set for that page</a>
+<span class="sourceLineNo">151</span><a id="line.151">     * @return {@link BookBuilder}</a>
+<span class="sourceLineNo">152</span><a id="line.152">     * @since 3.0.1</a>
+<span class="sourceLineNo">153</span><a id="line.153">     */</a>
+<span class="sourceLineNo">154</span><a id="line.154">    @NotNull</a>
+<span class="sourceLineNo">155</span><a id="line.155">    @Contract("_, _ -&gt; this")</a>
+<span class="sourceLineNo">156</span><a id="line.156">    public BookBuilder page(final int page, @NotNull final Component data) {</a>
+<span class="sourceLineNo">157</span><a id="line.157">        final BookMeta bookMeta = (BookMeta) getMeta();</a>
+<span class="sourceLineNo">158</span><a id="line.158"></a>
+<span class="sourceLineNo">159</span><a id="line.159">        if (VersionHelper.IS_COMPONENT_LEGACY) {</a>
+<span class="sourceLineNo">160</span><a id="line.160">            bookMeta.setPage(page, TextUtil.unparse(data, MessageType.LEGACY_STUPID));</a>
+<span class="sourceLineNo">161</span><a id="line.161">        } else {</a>
+<span class="sourceLineNo">162</span><a id="line.162">            bookMeta.page(page, data);</a>
+<span class="sourceLineNo">163</span><a id="line.163">        }</a>
+<span class="sourceLineNo">164</span><a id="line.164">        setMeta(bookMeta);</a>
+<span class="sourceLineNo">165</span><a id="line.165">        return this;</a>
+<span class="sourceLineNo">166</span><a id="line.166">    }</a>
+<span class="sourceLineNo">167</span><a id="line.167"></a>
+<span class="sourceLineNo">168</span><a id="line.168">    /**</a>
+<span class="sourceLineNo">169</span><a id="line.169">     * Sets the title of the book.</a>
+<span class="sourceLineNo">170</span><a id="line.170">     * &lt;p&gt;</a>
+<span class="sourceLineNo">171</span><a id="line.171">     * Limited to 32 characters. Removes title when given null.</a>
+<span class="sourceLineNo">172</span><a id="line.172">     *</a>
+<span class="sourceLineNo">173</span><a id="line.173">     * @param title the title to set</a>
+<span class="sourceLineNo">174</span><a id="line.174">     * @return {@link BookBuilder}</a>
+<span class="sourceLineNo">175</span><a id="line.175">     * @since 3.0.1</a>
+<span class="sourceLineNo">176</span><a id="line.176">     */</a>
+<span class="sourceLineNo">177</span><a id="line.177">    @NotNull</a>
+<span class="sourceLineNo">178</span><a id="line.178">    @Contract("_ -&gt; this")</a>
+<span class="sourceLineNo">179</span><a id="line.179">    public BookBuilder title(@Nullable Component title) {</a>
+<span class="sourceLineNo">180</span><a id="line.180">        final BookMeta bookMeta = (BookMeta) getMeta();</a>
+<span class="sourceLineNo">181</span><a id="line.181"></a>
+<span class="sourceLineNo">182</span><a id="line.182">        if (title == null) {</a>
+<span class="sourceLineNo">183</span><a id="line.183">            bookMeta.setTitle(null);</a>
+<span class="sourceLineNo">184</span><a id="line.184">            setMeta(bookMeta);</a>
+<span class="sourceLineNo">185</span><a id="line.185">            return this;</a>
+<span class="sourceLineNo">186</span><a id="line.186">        }</a>
+<span class="sourceLineNo">187</span><a id="line.187"></a>
+<span class="sourceLineNo">188</span><a id="line.188">        if (VersionHelper.IS_COMPONENT_LEGACY) {</a>
+<span class="sourceLineNo">189</span><a id="line.189">            bookMeta.setTitle(TextUtil.unparse(title, MessageType.LEGACY_STUPID));</a>
+<span class="sourceLineNo">190</span><a id="line.190">        } else {</a>
+<span class="sourceLineNo">191</span><a id="line.191">            bookMeta.title(title);</a>
+<span class="sourceLineNo">192</span><a id="line.192">        }</a>
+<span class="sourceLineNo">193</span><a id="line.193">        setMeta(bookMeta);</a>
+<span class="sourceLineNo">194</span><a id="line.194">        return this;</a>
+<span class="sourceLineNo">195</span><a id="line.195">    }</a>
+<span class="sourceLineNo">196</span><a id="line.196"></a>
+<span class="sourceLineNo">197</span><a id="line.197">}</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</main>
+</body>
+</html>
