@@ -1,0 +1,8 @@
+net.kyori.github.api
+net.kyori.github.api.v3
+net.kyori.github.api.v3.auth
+net.kyori.github.api.v3.auth.implementation
+net.kyori.github.api.v3.implementation
+net.kyori.github.api.webhook.event
+net.kyori.github.api.webhook.model
+net.kyori.github.util
